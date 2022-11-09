@@ -23,6 +23,11 @@ async function run() {
     try {
         const serviceCollection = client.db('oneStudio').collection('services')
 
+        const reviewCollection = client.db('oneStudio').collection('reviews')
+
+
+
+
         app.get('/services', async (req, res) => {
             const query = {}
             const cursor = serviceCollection.find(query)
@@ -43,6 +48,20 @@ async function run() {
             const service = await serviceCollection.findOne(query);
             res.send(service)
         })
+
+
+        // review api
+
+        app.post('/reviews', async (req, res) => {
+            const review = req.body;
+            const result = reviewCollection.insertOne(review);
+
+        })
+
+
+
+
+
 
     }
     finally {
