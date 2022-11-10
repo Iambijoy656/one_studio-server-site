@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express()
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -24,6 +25,24 @@ async function run() {
         const serviceCollection = client.db('oneStudio').collection('services')
 
         const reviewCollection = client.db('oneStudio').collection('reviews')
+
+
+        // JWT
+        app.post('/jwt', (req, res) => {
+            const user = req.body;
+            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' })
+            res.send({ token })
+        })
+
+
+
+
+
+
+
+
+
+
 
 
 
